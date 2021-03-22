@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[git] git push option (깃 푸시 옵션 - simple / matching)"
-date:   2021-02-15T14:25:52-05:00
+date:   2021-03-21T14:25:52-05:00
 author: Heejin Do
 categories: git
 tags:	git push simple matching
