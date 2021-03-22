@@ -9,7 +9,7 @@ tags:	git push simple matching
 
 git에서 push를 할 때 타겟 브랜치를 따로 지정하지 않고 push를 하면 아래 사진과 같은 `warning`이 뜬다.
 
-<img src="/assets/images/git_push1.PNG" title="">
+<img src="/assets/images/git_push1.png" title="">
 advice처럼 push를 할 때 두 가지 옵션(simple, matching)을 지정하라는 것인데,
 이 옵션에 따라 push 결과가 달라지므로 미리 설정해주는 것이 좋다.
 
