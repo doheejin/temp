@@ -1,72 +1,35 @@
 ---
 layout: post
-title:  "[git] git push option (깃 푸쉬 옵션 설정)"
+title:  "[git] git push option (깃 푸시 옵션 - simple / matching)"
 date:   2021-02-15T14:25:52-05:00
 author: Heejin Do
 categories: git
-tags:	github blog vscode windows MacOS
+tags:	git push simple matching
 ---
 
-지난 포스트에서는 Jekyll 테마를 이용해 자신의 블로그를 만드는 법에 대해 알아보았다.
+git에서 push를 할 때 타겟 브랜치를 따로 지정하지 않고 push를 하면 아래 사진과 같은 `warning`이 뜬다.
 
-이번 포스트에서는 로컬에서 블로그를 쉽게 관리하기 위해 환경 설정 하는 과정을 정리해보았다.
+<img src="/assets/images/git_push1.PNG" title="">
+advice처럼 push를 할 때 두 가지 옵션(simple, matching)을 지정하라는 것인데,
+이 옵션에 따라 push 결과가 달라지므로 미리 설정해주는 것이 좋다.
 
-Windows와 MacOS 두가지 환경을 다루었다.
-## 윈도우 (Windows)
+이 포스트에서는 push.default의 두 옵션에 대해 간단히 정리해보았다.
 
-### 1. 로컬에 작업용 폴더 생성
-repository를 복제할 작업용 폴더를 하나 생성한다.
-<img src="/assets/images/local_1.PNG" title="New Folder">
-
-### 2. vscode에서 repository 복제
-vscode를 열어 왼쪽의 `가지(branch)`모양 아이콘을 클릭한다.
-
-<img src="/assets/images/local_2.PNG" title="New Folder">
-
-`레포지토리 복제`를 클릭하고, 자신이 만든 블로그 레포지토리를 선택한다.
-
-<img src="/assets/images/local_3.PNG" title="New Folder">
-
-`1.`에서 만들어 둔 폴더를 클릭해 연결한다.
-
-레포지토리 복제가 끝나면 다음과 같은 메시지가 뜨는데,
-
-<img src="/assets/images/local_4.PNG" title="New Folder">
-
-`열기`를 클릭해보면, 레포지토리가 잘 복제되었음을 확인 할 수 있다.
-이제 해당 폴더의 파일을 수정/추가/삭제 해가며 자신만의 블로그를 꾸미면 된다!
-
-<img src="/assets/images/local_5.PNG" title="New Folder">
-
-------------------
-
-
-### (추가) - git 초기 설정
-기존에 vscode에서 git을 연동한 적이 없다면, 추가 설정이 필요 할 것이다.
-
-터미널(vscode의 터미널이나 윈도우의 cmd)에서 아래의 내용을 입력한다.
-{% highlight bash %}
-git init 
-git config --global user.name "닉네임" 
-git config --global user.email "이메일"
-{% endhighlight %}
-
-위 초기화를 마치고 레포지토리 복제가 완료되었다면, remote add를 통해 원격을 연결한다.
+### simple 옵션
+현재 사용 중인 브랜치만 원격 저장소에 push 하는 옵션이다.
+(git 2.0 ver 부터는 simple이 default로 설정됨)
 
 {% highlight bash %}
-git remote add <작업이름> <블로그url>
+git config --global push.default simple
+# --global : 현재 로그인된 user에 적용됨
+# --global 이 없으면 현재 저장소에만 적용됨
 {% endhighlight %}
 
-아래는 추가/삭제/수정사항을 반영할 때 add→commit→push를 위해 자주 쓰이는 명령어이다.
+### matching 옵션
+로컬과 원격 저장소의 브랜치 이름이 동일한 모든 브랜치를 push하는 옵션이다.
+이 경우, 원하지 않는 브랜치가 원격으로 push 될 수 있어서 simple을 기본으로 사용한다.
 
 {% highlight bash %}
-git status   # 현재 정보 확인
-git add 파일/폴더   # commit 할 파일/폴더 추가
-git commit -m '내용'   # commit 하기
-git push -u <작업이름> master   # 원격에 변경사항 반영
+git config --global push.default matching
 {% endhighlight %}
-
-## 맥 (MacOS)
-
-
 
