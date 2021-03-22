@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[github] 깃허브 블로그 구성(2) - vscode 로컬 작업 환경 갖추기"
+title:  "[git] git push option (깃 푸쉬 옵션 설정)"
 date:   2021-02-15T14:25:52-05:00
 author: Heejin Do
 categories: git

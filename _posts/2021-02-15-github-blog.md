@@ -3,7 +3,7 @@ layout: post
 title:  "[github] 깃허브 블로그 구성(1) - 블로그 만들기"
 date:   2021-02-14T14:25:52-05:00
 author: Heejin Do
-categories: github
+categories: git
 tags:	github blog
 ---
 
