@@ -66,5 +66,5 @@ print(torch.exp(F.log_softmax(dataset, dim=0))) # 로그 소프트맥스에 exp(
 {% endhighlight%}
 
 > 참고 사이트 
-> https://eli.thegreenplace.net/2016/the-softmax-function-and-its-derivative/
+> : https://eli.thegreenplace.net/2016/the-softmax-function-and-its-derivative/
 > https://discuss.pytorch.org/t/logsoftmax-vs-softmax/21386
