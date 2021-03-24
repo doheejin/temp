@@ -7,7 +7,7 @@ categories: pytorch
 tags:	pytorch deep_learning torch.nn functional softmax log_softmax
 ---
 
-torch.nn.functional을 사용할 때 softmax와 log_softmax에 대해 비교해보았다. 
+softmax와 log_softmax를 비교하고, torch.nn.functional에서의 사용법을 정리해보았다. 
 
 ### 1. softmax
 소프트맥스(softmax)는 입력값(k차원의 벡터)을 0에서 1 사이의 값으로 정규화해 k개의 각 클래스에 대한 확률을 추정하는 함수로, 이 때 출력값들의 총합은 1이 된다.
