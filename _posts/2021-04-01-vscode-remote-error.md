@@ -9,10 +9,11 @@ tags:	vscode envs server
 
 vscode 에서 원격 서버를 연결하다가 작업이 비정상적으로 종료된 이후, 재접속 했을 때
 
-아래 사진처럼 접속이 지연되면서 계속 retry가 뜰 때가 있다. (ex message : `connect to VS code server - retry n`)
+아래 사진처럼 접속이 지연되면서 계속 retry가 뜰 때가 있다.
 
 <img src="/assets/images/vs-remote-error0.png" title="">
-<img src="/assets/images/vs-remote-error2.png" title="">
+
+<img src="/assets/images/vs-remote-error2.PNG" title="">
 
 이런 경우 config 파일을 수정하고 새로 서버 등록후 접속해도 해결이 안 되었는데,
 
