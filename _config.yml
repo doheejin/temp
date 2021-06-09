@@ -50,8 +50,7 @@ jekyll-archives:
 disqus_shortname: doheejins-blog
 
 # Google analytics
-#ga_tracking_id: "G-1RPNTDL94D"
-ga_tracking_id: "263002919"
+ga_tracking_id: "G-6NJG8LYWDX"
 #g-analytics: 263002919
 
 # Category descriptions (for archive pages)
