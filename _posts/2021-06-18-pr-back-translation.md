@@ -12,9 +12,9 @@ tags:	nlp nmt back translation paper review back-translation deep-learning
 : published at EMNLP 2018
 
 > 소스 코드 (Open Source)
-: https://github.com/pytorch/fairseq
+: [https://github.com/pytorch/fairseq](https://github.com/pytorch/fairseq)
 
-이 논문은 **Back-Translation**의 NMT에서의 적용에 대해 분석하고, 여러 방식을 비교하여 어떤 방식이 효율적인지에 대해 제시하는 논문이다. WMT'14 En-De test set에서 SOTA를 달성한 논문이라 자세히 정리해보았다.
+이 논문은 **Back-Translation**의 NMT에서의 적용에 대해 분석하고, 여러 방식을 비교하여 어떤 방식이 효율적인지에 대해 제시하는 논문이다. **WMT'14 En-De test set에서 SOTA를 달성한 논문**이라 자세히 정리해보았다.
 
 ## Abstract
 target 언어 데이터를 **Back-Translation**하여 parallel corpus를 augment 하는 기법은 NMT 성능 향상을 위해 자주 사용된다. 이 논문에서는 **Back-Translation**에 대해 분석하고, 여러 방법론을 조사하여 비교했다. 이를 통해 resource가 부족한 환경에서 sampling이나 noised beam output으로 이뤄진 **Back-Translation**이 가장 효과적임을 발견했다. 또한, 합성 데이터와 본래의 bitext 데이터를 비교하여 domain 영향을 연구했다. 마지막으로, 대량의 monolingual sentence 데이터에 적용하여 새로운 SOTA(35 BLEU on WMT'14 En-De)를 달성했다. 
@@ -43,21 +43,20 @@ Back-Translation은 monolingual data의 횔용도를 높일 수 있는 대체 �
 ## Methods : Generating synthetic sources
 보통 Back-translation에서는 beam search나 greedy search를 사용해 synthetic source 문장을 생성한다. 두 가지 모두 MAP 결과를 찾기 위한 근접 알고리즘에 기반을 둔다. 하지만, MAP 예측은 항상 가장 가능성이 높은 것에만 집중하기에 덜 풍부한 번역으로 이어질 수 있다. 이런 특징(beam/greedy에서 모델 분포의 head쪽에만 집중하는 것) dialog나 스토리 생성 처럼 불확실성이 높은 태스크에서 문제가 될 수 있다. 이 논문에서는 이런 특징이 back-translation에서도 문제가 된다고 주장하며 모델 분포에서의 sampling과 beam search output에 noise를 추가하는 두 가지 방법을 제안한다. 이 논문에서는 아래의 세 가지 경우를 탐색/분석했다.
 
-1) unrestricted sampling : 가끔 높은 확률로 정답에서 벗어날 정도로, 매우 넓은 범위의 결과를 생성한다.
-2) restricted sampling : 매 스텝에서 결과 분포로부터 k개의 가장 가능성 높은 토큰을 선택하고, 재-표준화(re-normalize) 한 이후, 이 restricted set으로부터 샘플링을 한다. (MAP와 unrestricted sampling의 중간에 있다고 볼 수 있다.)
-3) noising beam search output : 세가지 타입의 노이즈를 통해 source sentence를 변형했다(deleting, replacing/swapping words)
+**1) unrestricted sampling** : 가끔 높은 확률로 정답에서 벗어날 정도로, 매우 넓은 범위의 결과를 생성한다.
 
+**2) restricted sampling** : 매 스텝에서 결과 분포로부터 k개의 가장 가능성 높은 토큰을 선택하고, 재-표준화(re-normalize) 한 이후, 이 restricted set으로부터 샘플링을 한다. (MAP와 unrestricted sampling의 중간에 있다고 볼 수 있다.)
 
-## Methods
-
-#### 2.1. Distance-wise distillation loss
-
-#### 2.2. Angle-wise distillation loss
-
-#### 2.3. Training with RKD
+**3) noising beam search output** : 세가지 타입의 노이즈를 통해 source sentence를 변형했다(deleting, replacing/swapping words)
 
 ## Experiments
+모든 실험에서 Big Transformer(w/ 6 blocks in En/De)를 사용하였고, 동일한 하이퍼파라미터를 지정했다. 구체적인 실험 환경은 논문을 참고.
+
+### Results
+
 
 ## Conclusion
+Back-Translation은 NMT에서 매우 효과적인 augmentation 기술이다. 이 논문에서는 sampling이나 adding noise to beam outputs를 통해 synthetic sources를 생성하는 것이 대게 사용되는 argmax 보다 더 정확도가 높다는 것을 보였다. 또한, synthetic data가 실제 bitext 데이터로 얻을 수 있는 성능의 83%까지 얻을 수 있다는 것을 발견했다. 마지막으로, WMT'14 EN-De test set에서 35 BLEU 점수를 얻으며 그 효과를 입증했다. 
 
 ## Insights & Opinion
+실험 결과 중, 완전히 unrestricted sampling 된 경우가 상대적으로 높은 불확실성에도 불구하고 tok-10으로 restricted sampling 된 경우보다 BLEU 점수가 높았다는 점이 인상깊었다. augmentation의 측면에서는 정답과 유사한(그럴싸한) 표현으로 구성된 문장보다 덜 비슷한(more unlikely) 단어 및 표현으로 구성된 문장이 실제 학습(source→target)에서 오히려 더 풍부한 학습을 가능하게 해주는 것이 아닐까. Back-Translation으로 생성된 soruce를 데이터셋에 추가할 때, target은 동일한 문장으로 남을 텐데 target 측면에서의 다양성을 위해 continuous 하게 Back-Translation 하는 방법도 도움이 될 것 같다. Continuous Back-Translation, dual learning 등 관련된 여러 기술에 대해 더 알아보고자 한다. 
