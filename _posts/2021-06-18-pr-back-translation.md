@@ -3,7 +3,7 @@ layout: post
 title:  "[NMT] Understanding Back-Translation at Scale"
 date:   2021-06-18T14:25:52-05:00
 author: Heejin Do
-categories: #"paper_review"
+categories: "paper_review"
 tags:	nlp nmt back translation paper review back-translation deep-learning
 ---
 
